@@ -27,6 +27,3 @@ function MyApp({ Component, pageProps }) {
 			</NextUIProvider>
 		</NextThemesProvider>
 	);
-}
-
-export default MyApp;
