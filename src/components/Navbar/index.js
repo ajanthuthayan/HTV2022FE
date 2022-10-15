@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
+import { Navbar, Button, Link, Text } from "@nextui-org/react";
 import {
-	Navbar,
-	Button,
-	Link,
-	Text,
-	Avatar,
-	Dropdown,
-} from "@nextui-org/react";
+	signInWithGooglePopup,
+	signOutUser,
+	createUserDocumentFromAuth,
+} from "../../../utils/firebase.utils";
 import { useRouter } from "next/router";
 import AvatarDropdown from "../AvatarDropdown";
 
@@ -23,27 +21,33 @@ export default function NavbarComponent() {
 
 	useEffect(() => {
 		setActiveLink(router.route);
+		checkoutAuthenticationStatus();
 	}, [router]);
 
-	const loginHandler = () => {
+	const checkoutAuthenticationStatus = () => {
+		if (localStorage.getItem("userId") === null) {
+			return setIsAuthenticated(false);
+		}
+		return setIsAuthenticated(true);
+	};
+
+	const loginHandler = async () => {
+		const { user } = await signInWithGooglePopup();
+		await createUserDocumentFromAuth(user);
+		localStorage.setItem("userId", user.uid);
 		setIsAuthenticated(true);
 	};
 
 	const logoutHandler = () => {
+		signOutUser();
 		setIsAuthenticated(false);
 	};
 
 	if (isAuthenticated) {
 		return (
-			<div
-				style={{
-					boxSizing: "border-box",
-					maxWidth: "100%",
-				}}
-			>
+			<>
 				<Navbar variant="floating">
 					<Navbar.Brand>
-						<Navbar.Toggle aria-label="toggle navigation" showIn={showIn} />
 						{/* <AcmeLogo /> */}
 						<Text b color="inherit" onClick={() => router.replace("/")}>
 							Accedo
@@ -58,47 +62,16 @@ export default function NavbarComponent() {
 							justifyContent: "center",
 						}}
 					>
-						{/* {routes.map((route, index) => {
-							return (
-								<Navbar.Link
-									key={index}
-									href={route.path}
-									isActive={route.path === router.route ? true : false}
-								>
-									{route.name}
-								</Navbar.Link>
-							);
-						})} */}
 						<AvatarDropdown onLogout={logoutHandler} />
 					</Navbar.Content>
-
-					<Navbar.Collapse showIn={showIn}>
-						{routes.map((route, index) => (
-							<Navbar.CollapseItem key={index}>
-								<Link
-									color="inherit"
-									style={{ minWidth: "100%" }}
-									href={route.path}
-								>
-									{route.name}
-								</Link>
-							</Navbar.CollapseItem>
-						))}
-					</Navbar.Collapse>
 				</Navbar>
-			</div>
+			</>
 		);
 	}
 	return (
-		<div
-			style={{
-				boxSizing: "border-box",
-				maxWidth: "100%",
-			}}
-		>
+		<>
 			<Navbar variant="floating">
 				<Navbar.Brand>
-					<Navbar.Toggle aria-label="toggle navigation" showIn={showIn} />
 					{/* <AcmeLogo /> */}
 					<Text b color="inherit" onClick={() => router.replace("/")}>
 						Accedo
@@ -118,6 +91,6 @@ export default function NavbarComponent() {
 					</Navbar.Item>
 				</Navbar.Content>
 			</Navbar>
-		</div>
+		</>
 	);
 }
