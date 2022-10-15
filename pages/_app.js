@@ -12,7 +12,7 @@ const darkTheme = createTheme({
 	theme: {},
 });
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
 	return (
 		<NextThemesProvider
 			defaultTheme="system"
@@ -27,3 +27,4 @@ function MyApp({ Component, pageProps }) {
 			</NextUIProvider>
 		</NextThemesProvider>
 	);
+}
