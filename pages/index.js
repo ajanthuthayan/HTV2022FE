@@ -4,6 +4,12 @@ import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 // import PreviewCard from "../src/components/PreviewCard";
 import Navbar from "../src/components/Navbar";
+import FollowedCarousel from "../src/components/FollowedCarousel/FollowedCarousel";
+
+import {
+	signInWithGooglePopup,
+	createUserDocumentFromAuth,
+} from "../utils/firebase.utils"
 
 export default function Home() {
 	const [data, setData] = useState([]);
@@ -64,6 +70,12 @@ export default function Home() {
 		});
 	};
 
+	const logInGoogleUser = async () => {
+		const { user } = await signInWithGooglePopup();
+		await createUserDocumentFromAuth(user);
+		localStorage.setItem('userId', user.uid);
+	  }
+
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -72,9 +84,11 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Navbar />
+      <FollowedCarousel />
 			<main className={styles.main}>
 				<h1 className={styles.title}>Home</h1>
 				<div className={styles.grid}>
+		
 					{/* {horizontalMovies?.map((video, index) => {
 						return <PreviewCard key={index} video={video} />;
 					})}
@@ -83,24 +97,13 @@ export default function Home() {
 					})} */}
 				</div>
 			</main>
+			<button onClick={logInGoogleUser}>
+				Login
+			</button>
 		</div>
 	);
 }
 
-// import {
-//   signInWithGooglePopup,
-//   createUserDocumentFromAuth,
-// } from "../utils/firebase.utils"
 
-// export default function Home() {
-//   const logInGoogleUser = async () => {
-//     const { user } = await signInWithGooglePopup();
-//     await createUserDocumentFromAuth(user);
-//     localStorage.setItem('userId', user.uid);
-//   }
 
-//   return (
-//   <>
-//   </>
-//   )
-// }
+

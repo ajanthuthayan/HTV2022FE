@@ -28,12 +28,12 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
+  apiKey: "AIzaSyAb8wHRbHywXVlef9_DsTEp2TLMruEOlzo",
   authDomain: "hackthevalley22.firebaseapp.com",
   projectId: "hackthevalley22",
   storageBucket: "hackthevalley22.appspot.com",
   messagingSenderId: "341870125072",
-  appId: process.env.FIREBASE_APPID,
+  appId: "1:341870125072:web:bbc7bf1001791969952a95",
   measurementId: "G-KH6RJWJ0BQ"
 };
 
@@ -57,7 +57,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
     const userSnapshot = await getDoc(userDocRef);
 
     if(!userSnapshot.exists()){
-        const { displayName, email } = userAuth;
+        const { displayName, email, photoURL} = userAuth;
         const createdAt = new Date();
         const userObj = {
             displayName,
@@ -66,6 +66,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
             previouslyWatched: [''],
             currentlyWatching: '',
             createdAt,
+            photoURL, 
         };
 
         try {
@@ -115,7 +116,7 @@ export const getUserInformation = async () => {
     querySnapshot.docs.reduce((acc, docSnapshot) => {
         users.push(docSnapshot.data());
     }, {});
-
+    
     return users;
 }
 

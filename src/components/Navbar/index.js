@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import AvatarDropdown from "../AvatarDropdown";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function NavbarComponent() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -49,6 +50,7 @@ export default function NavbarComponent() {
 							Accedo
 						</Text>
 					</Navbar.Brand>
+					<SearchBar />
 					<Navbar.Content
 						activeColor={activeColor}
 						hideIn={hideIn}
@@ -104,6 +106,7 @@ export default function NavbarComponent() {
 						Accedo
 					</Text>
 				</Navbar.Brand>
+				<SearchBar />
 				<Navbar.Content activeColor={activeColor}>
 					<Navbar.Item>
 						<Button
