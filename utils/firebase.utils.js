@@ -80,7 +80,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
     
 }
 
-export const addPrevOrFollowed = async (uid, field, data) => {
+export const addPrevOrFollowed = async (field, data) => {
+    const uid = localStorage.getItem('userId');
     const userRef = doc(db, 'users', uid);
     try {
         await updateDoc(userRef, {
@@ -92,7 +93,8 @@ export const addPrevOrFollowed = async (uid, field, data) => {
 
 }
 
-export const removePrevOrFollowed = async (uid, field, data) => {
+export const removePrevOrFollowed = async (field, data) => {
+    const uid = localStorage.getItem('userId');
     const userRef = doc(db, 'users', uid);
     try {
         await updateDoc(userRef, {
@@ -115,6 +117,9 @@ export const getUserInformation = async () => {
     }, {});
 
     return users;
+}
 
 
+export const signOutUser = () => {
+    localStorage.removeItem('userId')
 }
