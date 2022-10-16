@@ -25,12 +25,12 @@ import {
 
 
 const firebaseConfig = {
-	apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+	apiKey: 'AIzaSyAb8wHRbHywXVlef9_DsTEp2TLMruEOlzo',
 	authDomain: "hackthevalley22.firebaseapp.com",
 	projectId: "hackthevalley22",
 	storageBucket: "hackthevalley22.appspot.com",
 	messagingSenderId: "341870125072",
-	appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
+	appId: '1:341870125072:web:bbc7bf1001791969952a95',
 	measurementId: "G-KH6RJWJ0BQ",
 };
 
