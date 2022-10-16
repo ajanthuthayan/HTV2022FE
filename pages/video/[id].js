@@ -6,7 +6,7 @@ import { BiArrowBack } from "react-icons/bi";
 
 export default function VideoPage({ video }) {
 	const [showBadge, setShowBadge] = useState(false);
-	const badgeVisibleTime = [5, 10];
+	const badgeVisibleTime = [65, 72];
 
 	const router = useRouter();
 
@@ -49,9 +49,16 @@ export default function VideoPage({ video }) {
 								color: "white",
 								height: "fit-content",
 								padding: "1rem",
+								cursor: "pointer",
 							}}
 						>
-							Purchase a test product now!
+							<a
+								href="https://www.gapcanada.ca/browse/product.do?pid=861269003&vid=1&tid=gcpl000029&kwid=1&ap=7&gclid=CjwKCAjwtKmaBhBMEiwAyINuwMDkOLh8MWagb-f0YQKbjl_LaUnEWPP7rUy-Hgn2LjAogWjzujzvzxoCzOkQAvD_BwE&gclsrc=aw.ds&fbclid=IwAR3TWDZp3vnlowRLUqZ8yyUp1W5IlAR66XE_P0fw-A09v2TpBgCZGGZRZA4"
+								rel="noreferrer"
+								target="_blank"
+							>
+								Buy the same top here at GAP
+							</a>
 						</div>
 					)}
 				</div>

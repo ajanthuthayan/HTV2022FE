@@ -4,6 +4,8 @@ export default function AvatarDropdown({ image, name, onLogout }) {
 	const test = () => {
 		console.log(true);
 	};
+
+	const color = "warning";
 	return (
 		<Grid.Container justify="flex-start" gap={2}>
 			<Grid>
@@ -17,7 +19,7 @@ export default function AvatarDropdown({ image, name, onLogout }) {
 							src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
 						/>
 					</Dropdown.Trigger>
-					<Dropdown.Menu color="error" aria-label="User Actions">
+					<Dropdown.Menu color={color} aria-label="User Actions">
 						<Dropdown.Item key="profile" css={{ height: "$18" }}>
 							<Text b color="inherit" css={{ d: "flex" }}>
 								Signed in as
@@ -31,7 +33,7 @@ export default function AvatarDropdown({ image, name, onLogout }) {
 						</Dropdown.Item>
 						<Dropdown.Item key="settings">Settings</Dropdown.Item>
 						<Dropdown.Item key="logout" withDivider color="none">
-							<Text weight="medium" color="error" onClick={onLogout}>
+							<Text weight="medium" color={color} onClick={onLogout}>
 								Logout
 							</Text>
 						</Dropdown.Item>

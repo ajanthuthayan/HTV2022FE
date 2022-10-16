@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./Navbar.module.scss";
 import { Navbar, Button, Link, Text } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import AvatarDropdown from "../AvatarDropdown";
@@ -14,7 +15,7 @@ export default function NavbarComponent({
 	const router = useRouter();
 	const routes = [{ name: "Home", path: "/home" }];
 
-	const activeColor = "error";
+	const activeColor = "warning";
 	const showIn = "md";
 	const hideIn = "md";
 
@@ -24,8 +25,8 @@ export default function NavbarComponent({
 
 	if (isAuthenticated) {
 		return (
-			<>
-				<Navbar variant="floating">
+			<div className={styles.container}>
+				<Navbar variant="static">
 					<Navbar.Brand>
 						<Text b color="inherit" onClick={() => router.replace("/")}>
 							CineTrak
@@ -44,11 +45,11 @@ export default function NavbarComponent({
 						<AvatarDropdown onLogout={onLogout} />
 					</Navbar.Content>
 				</Navbar>
-			</>
+			</div>
 		);
 	}
 	return (
-		<>
+		<div className={styles.container}>
 			<Navbar variant="floating">
 				<Navbar.Brand>
 					<Text b color="inherit" onClick={() => router.replace("/")}>
@@ -63,6 +64,6 @@ export default function NavbarComponent({
 					</Navbar.Item>
 				</Navbar.Content>
 			</Navbar>
-		</>
+		</div>
 	);
 }
