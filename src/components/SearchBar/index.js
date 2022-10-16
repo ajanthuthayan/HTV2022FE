@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { getUserInformation } from "../../../utils/firebase.utils";
-
+import styles from './SearchBar.module.scss';
 export default function SearchBar() {
 	const [users, setUsers] = useState([]);
 
@@ -10,6 +10,7 @@ export default function SearchBar() {
 			...provided,
 			color: "black",
 		}),
+		menu: styles => ({ ...styles, zIndex: 999 }),
 	};
 
 	useEffect(() => {
@@ -43,7 +44,7 @@ export default function SearchBar() {
 		>
 			<Select
 				options={users}
-				styles={customStyles}
+				styles={{...customStyles, ...styles}}
 				placeholder="Search"
 				onChange={(option) => getSelected(option.value)}
 			/>
