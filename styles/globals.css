@@ -12,6 +12,5 @@ body {
 
 #__next {
 	min-width: 320px;
-	overflow-x: scroll;
 	background-color: #040404;
 }

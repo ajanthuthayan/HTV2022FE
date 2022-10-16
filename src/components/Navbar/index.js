@@ -1,57 +1,34 @@
 import { useEffect, useState } from "react";
 import { Navbar, Button, Link, Text } from "@nextui-org/react";
-import {
-	signInWithGooglePopup,
-	signOutUser,
-	createUserDocumentFromAuth,
-} from "../../../utils/firebase.utils";
 import { useRouter } from "next/router";
 import AvatarDropdown from "../AvatarDropdown";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../SearchBar";
 
-export default function NavbarComponent() {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
+export default function NavbarComponent({
+	isAuthenticated,
+	onLogout,
+	onLogin,
+}) {
 	const [activeLink, setActiveLink] = useState("");
-	const router = useRouter();
-	const activeColor = "error";
 
+	const router = useRouter();
 	const routes = [{ name: "Home", path: "/home" }];
 
+	const activeColor = "error";
 	const showIn = "md";
 	const hideIn = "md";
 
 	useEffect(() => {
 		setActiveLink(router.route);
-		checkoutAuthenticationStatus();
 	}, [router]);
-
-	const checkoutAuthenticationStatus = () => {
-		if (localStorage.getItem("userId") === null) {
-			return setIsAuthenticated(false);
-		}
-		return setIsAuthenticated(true);
-	};
-
-	const loginHandler = async () => {
-		const { user } = await signInWithGooglePopup();
-		await createUserDocumentFromAuth(user);
-		localStorage.setItem("userId", user.uid);
-		setIsAuthenticated(true);
-	};
-
-	const logoutHandler = () => {
-		signOutUser();
-		setIsAuthenticated(false);
-	};
 
 	if (isAuthenticated) {
 		return (
 			<>
 				<Navbar variant="floating">
 					<Navbar.Brand>
-						{/* <AcmeLogo /> */}
 						<Text b color="inherit" onClick={() => router.replace("/")}>
-							Accedo
+							CineTrak
 						</Text>
 					</Navbar.Brand>
 					<SearchBar />
@@ -64,7 +41,7 @@ export default function NavbarComponent() {
 							justifyContent: "center",
 						}}
 					>
-						<AvatarDropdown onLogout={logoutHandler} />
+						<AvatarDropdown onLogout={onLogout} />
 					</Navbar.Content>
 				</Navbar>
 			</>
@@ -74,21 +51,14 @@ export default function NavbarComponent() {
 		<>
 			<Navbar variant="floating">
 				<Navbar.Brand>
-					{/* <AcmeLogo /> */}
 					<Text b color="inherit" onClick={() => router.replace("/")}>
-						Accedo
+						CineTrak
 					</Text>
 				</Navbar.Brand>
 				<SearchBar />
 				<Navbar.Content activeColor={activeColor}>
 					<Navbar.Item>
-						<Button
-							auto
-							flat
-							as={Link}
-							color={activeColor}
-							onClick={loginHandler}
-						>
+						<Button auto flat as={Link} color={activeColor} onClick={onLogin}>
 							Login
 						</Button>
 					</Navbar.Item>
