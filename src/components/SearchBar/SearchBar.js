@@ -16,11 +16,10 @@ export default function SearchBar() {
             var currentUsers = [];
             const res = await getUserInformation();
             res.map((account) => {
-                console.log(account.displayName)
                 currentUsers.push({ value: account.displayName, label: account.displayName, isDisabled: false })
             })
+            
             setUsers(currentUsers);    
-            console.log(res)
         }
 
         getUserInfo();
