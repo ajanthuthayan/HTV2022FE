@@ -10,7 +10,6 @@ export default function AvatarDropdown({ image, name, onLogout }) {
 				<Dropdown placement="bottom-left">
 					<Dropdown.Trigger>
 						<User
-							squared
 							as="button"
 							size="lg"
 							name="First Last"
