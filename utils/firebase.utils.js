@@ -114,11 +114,8 @@ export const getUserInformation = async () => {
     }, {});
     
     return users;
-}
-
-
-	return users;
 };
+
 
 export const signOutUser = () => {
 	localStorage.removeItem("userId");
