@@ -27,6 +27,7 @@ import {
     arrayRemove,
 } from 'firebase/firestore';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAb8wHRbHywXVlef9_DsTEp2TLMruEOlzo",
   authDomain: "hackthevalley22.firebaseapp.com",
