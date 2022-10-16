@@ -6,16 +6,13 @@ import {
 	createUserDocumentFromAuth,
 } from "../utils/firebase.utils";
 import { useEffect, useState } from "react";
-// import PreviewCard from "../src/components/PreviewCard";
 import Navbar from "../src/components/Navbar";
 import { useRouter } from "next/router";
 import AuthenticatedContent from "../src/containers/AuthenticatedContent";
+import FollowedCarousel from "../src/components/FollowedCarousel/FollowedCarousel";
 
 export default function Home() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-	const [data, setData] = useState([]);
-	const [videos, setVideos] = useState([]);
 	const [horizontalMovies, setHorizontalMovies] = useState([]);
 	const [verticalMovies, setVerticalMovies] = useState([]);
 
@@ -58,8 +55,6 @@ export default function Home() {
 			}
 		);
 		const responseData = await response.json();
-		setData(responseData);
-		setVideos(responseData.videos);
 		setHorizontalMovies(filterHorizontalMovies(responseData.videos));
 		setVerticalMovies(filterVerticalMovies(responseData.videos));
 	};
@@ -108,13 +103,13 @@ export default function Home() {
 				onLogin={loginHandler}
 				isAuthenticated={isAuthenticated}
 			/>
+			<FollowedCarousel />
 			{isAuthenticated && (
 				<AuthenticatedContent
 					horizontalMovies={horizontalMovies}
 					verticalMovies={verticalMovies}
 				/>
 			)}
-			<main className={styles.main}></main>
 		</div>
 	);
 }

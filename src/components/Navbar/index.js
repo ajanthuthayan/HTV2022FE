@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Navbar, Button, Link, Text } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import AvatarDropdown from "../AvatarDropdown";
+import SearchBar from "../SearchBar";
+
 export default function NavbarComponent({
 	isAuthenticated,
 	onLogout,
@@ -29,6 +31,7 @@ export default function NavbarComponent({
 							CineTrak
 						</Text>
 					</Navbar.Brand>
+					<SearchBar />
 					<Navbar.Content
 						activeColor={activeColor}
 						hideIn={hideIn}
@@ -52,6 +55,7 @@ export default function NavbarComponent({
 						CineTrak
 					</Text>
 				</Navbar.Brand>
+				<SearchBar />
 				<Navbar.Content activeColor={activeColor}>
 					<Navbar.Item>
 						<Button auto flat as={Link} color={activeColor} onClick={onLogin}>
