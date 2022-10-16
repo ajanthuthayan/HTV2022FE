@@ -3,6 +3,7 @@ import styles from "./Navbar.module.scss";
 import { Navbar, Button, Link, Text } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import AvatarDropdown from "../AvatarDropdown";
+import { BiSearch } from "react-icons/bi";
 import SearchBar from "../SearchBar";
 
 export default function NavbarComponent({
@@ -28,11 +29,10 @@ export default function NavbarComponent({
 			<div className={styles.container}>
 				<Navbar variant="static">
 					<Navbar.Brand>
-						<Text b color="inherit" onClick={() => router.replace("/")}>
+						<Text h2 color="inherit" onClick={() => router.replace("/")}>
 							CineTrak
 						</Text>
 					</Navbar.Brand>
-					<SearchBar />
 					<Navbar.Content
 						activeColor={activeColor}
 						hideIn={hideIn}
@@ -42,6 +42,8 @@ export default function NavbarComponent({
 							justifyContent: "center",
 						}}
 					>
+						{/* <SearchBar /> */}
+						<BiSearch size="32px" style={{ cursor: "pointer" }} />
 						<AvatarDropdown onLogout={onLogout} />
 					</Navbar.Content>
 				</Navbar>
@@ -52,7 +54,7 @@ export default function NavbarComponent({
 		<div className={styles.container}>
 			<Navbar variant="floating">
 				<Navbar.Brand>
-					<Text b color="inherit" onClick={() => router.replace("/")}>
+					<Text h2 color="inherit" onClick={() => router.replace("/")}>
 						CineTrak
 					</Text>
 				</Navbar.Brand>

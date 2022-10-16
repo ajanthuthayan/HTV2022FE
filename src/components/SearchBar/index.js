@@ -38,8 +38,7 @@ export default function SearchBar() {
 	return (
 		<div
 			style={{
-				width: "80%",
-				margin: "auto",
+				width: "100%",
 			}}
 		>
 			<Select
