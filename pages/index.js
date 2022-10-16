@@ -103,12 +103,14 @@ export default function Home() {
 				onLogin={loginHandler}
 				isAuthenticated={isAuthenticated}
 			/>
-			<FollowedCarousel />
 			{isAuthenticated && (
-				<AuthenticatedContent
-					horizontalMovies={horizontalMovies}
-					verticalMovies={verticalMovies}
-				/>
+				<>
+					<FollowedCarousel />
+					<AuthenticatedContent
+						horizontalMovies={horizontalMovies}
+						verticalMovies={verticalMovies}
+					/>
+				</>
 			)}
 		</div>
 	);

@@ -55,7 +55,6 @@ export default function NavbarComponent({
 						CineTrak
 					</Text>
 				</Navbar.Brand>
-				<SearchBar />
 				<Navbar.Content activeColor={activeColor}>
 					<Navbar.Item>
 						<Button auto flat as={Link} color={activeColor} onClick={onLogin}>
