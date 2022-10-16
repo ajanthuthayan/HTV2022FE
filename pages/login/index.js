@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../../styles/Login.module.css";
 import Navbar from "../../src/components/Navbar";
+import FollowedCarousel from "../../src/components/FollowedCarousel/FollowedCarousel";
 
 export default function Login() {
 	return (
@@ -11,6 +12,7 @@ export default function Login() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Navbar />
+			<FollowedCarousel />
 			<main className={styles.main}>
 				<h1 className={styles.title}>Login</h1>
 			</main>

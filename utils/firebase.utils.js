@@ -23,13 +23,14 @@ import {
 	arrayRemove,
 } from "firebase/firestore";
 
+
 const firebaseConfig = {
-	apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+	apiKey: 'AIzaSyAb8wHRbHywXVlef9_DsTEp2TLMruEOlzo',
 	authDomain: "hackthevalley22.firebaseapp.com",
 	projectId: "hackthevalley22",
 	storageBucket: "hackthevalley22.appspot.com",
 	messagingSenderId: "341870125072",
-	appId: process.env.NEXT_PUBLIC_FIREBASE_APPID,
+	appId: '1:341870125072:web:bbc7bf1001791969952a95',
 	measurementId: "G-KH6RJWJ0BQ",
 };
 
@@ -49,30 +50,34 @@ export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const createUserDocumentFromAuth = async (userAuth) => {
-	const userDocRef = doc(db, "users", userAuth.uid);
-	const userSnapshot = await getDoc(userDocRef);
 
-	if (!userSnapshot.exists()) {
-		const { displayName, email } = userAuth;
-		const createdAt = new Date();
-		const userObj = {
-			displayName,
-			email,
-			followedUsers: ["0"],
-			previouslyWatched: [""],
-			currentlyWatching: "",
-			createdAt,
-		};
+    const userDocRef = doc(db, 'users', userAuth.uid);
+    const userSnapshot = await getDoc(userDocRef);
 
-		try {
-			await setDoc(userDocRef, userObj);
-		} catch (error) {
-			console.log(`error creating the user: ${error.message}`);
-		}
-	}
+    if(!userSnapshot.exists()){
+        const { displayName, email, photoURL} = userAuth;
+        const createdAt = new Date();
+        const userObj = {
+            displayName,
+            email,
+            followedUsers: ['0'],
+            previouslyWatched: [''],
+            currentlyWatching: '',
+            createdAt,
+            photoURL, 
+        };
 
-	return userAuth;
-};
+        try {
+            await setDoc(userDocRef, userObj);
+            
+        } catch (error) {
+            console.log(`error creating the user: ${error.message}`);
+        }
+    }
+
+    return userAuth;
+    
+}
 
 export const addPrevOrFollowed = async (field, data) => {
 	const uid = localStorage.getItem("userId");
@@ -104,12 +109,13 @@ export const getUserInformation = async () => {
 	var users = [];
 	const querySnapshot = await getDocs(q);
 
-	querySnapshot.docs.reduce((acc, docSnapshot) => {
-		users.push(docSnapshot.data());
-	}, {});
-
-	return users;
+    querySnapshot.docs.reduce((acc, docSnapshot) => {
+        users.push(docSnapshot.data());
+    }, {});
+    
+    return users;
 };
+
 
 export const signOutUser = () => {
 	localStorage.removeItem("userId");
